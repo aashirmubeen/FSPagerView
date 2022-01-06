@@ -366,6 +366,7 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
         guard let function = self.delegate?.pagerView(_:didSelectItemAt:) else {
             return
         }
+        
         self.possibleTargetingIndexPath = indexPath
         defer {
             self.possibleTargetingIndexPath = nil
@@ -564,6 +565,7 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
         let collectionView = FSPagerCollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.allowsSelection = false
         collectionView.backgroundColor = UIColor.clear
         self.contentView.addSubview(collectionView)
         self.collectionView = collectionView
