@@ -97,10 +97,10 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
     @IBInspectable
     open var automaticSlidingInterval: CGFloat = 0.0 {
         didSet {
-            self.cancelTimer()
-            if self.automaticSlidingInterval > 0 {
+            //self.cancelTimer()
+            //if self.automaticSlidingInterval > 0 {
                 self.startTimer()
-            }
+           // }
         }
     }
     
@@ -576,21 +576,21 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
             return
         }
         self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(self.automaticSlidingInterval), target: self, selector: #selector(self.flipNext(sender:)), userInfo: nil, repeats: true)
-        RunLoop.current.add(self.timer!, forMode: .common)
+        RunLoop.current.add(self.timer!, forMode: .tracking)
     }
     
+    
+    func autoScroll () {
+        let co = collectionView.contentOffset.x
+        let no = co + 0.5
+        self.collectionView.contentOffset = CGPoint(x: no, y: 0)
+    }
     @objc
     fileprivate func flipNext(sender: Timer?) {
         guard let _ = self.superview, let _ = self.window, self.numberOfItems > 0, !self.isTracking else {
             return
         }
-        let contentOffset: CGPoint = {
-            let indexPath = self.centermostIndexPath
-            let section = self.numberOfSections > 1 ? (indexPath.section+(indexPath.item+1)/self.numberOfItems) : 0
-            let item = (indexPath.item+1) % self.numberOfItems
-            return self.collectionViewLayout.contentOffset(for: IndexPath(item: item, section: section))
-        }()
-        self.collectionView.setContentOffset(contentOffset, animated: true)
+        autoScroll ()
     }
     
     fileprivate func cancelTimer() {
