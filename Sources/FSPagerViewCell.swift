@@ -18,7 +18,7 @@ open class FSPagerViewCell: UICollectionViewCell {
         }
         let view = UIView(frame: .zero)
         view.isUserInteractionEnabled = false
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        view.backgroundColor = UIColor.black.withAlphaComponent(_opacity)
         
         let textLabel = UILabel(frame: .zero)
         textLabel.textColor = .white
@@ -46,7 +46,7 @@ open class FSPagerViewCell: UICollectionViewCell {
     
     fileprivate weak var _textLabel: UILabel?
     fileprivate weak var _imageView: UIImageView?
-    
+    fileprivate var _opacity:CGFloat = 0.0
     fileprivate let kvoContext = UnsafeMutableRawPointer(bitPattern: 0)
     fileprivate let selectionColor = UIColor(white: 0.2, alpha: 0.2)
     
