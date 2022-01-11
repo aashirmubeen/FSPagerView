@@ -45,7 +45,7 @@ open class FSPagerViewCell: UICollectionViewCell {
     
     fileprivate weak var _textLabel: UILabel?
     fileprivate weak var _imageView: UIImageView?
-    var shadowOpacity:Float = 0.0
+    public var shadowOpacity:Float = 0.0
     fileprivate let kvoContext = UnsafeMutableRawPointer(bitPattern: 0)
     fileprivate let selectionColor = UIColor(white: 0.2, alpha: 0.2)
     
