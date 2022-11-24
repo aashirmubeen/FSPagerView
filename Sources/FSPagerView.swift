@@ -120,6 +120,7 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
         }
     }
     
+    open var isPagingEnable: Bool = false
     /// A Boolean value indicates that whether the pager view has infinite items. Default is false.
     @IBInspectable
     open var isInfinite: Bool = false {
@@ -589,10 +590,20 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
     }
     @objc
     fileprivate func flipNext(sender: Timer?) {
-        guard let _ = self.superview, let _ = self.window, self.numberOfItems > 0, !self.isTracking else {
-            return
+        if isPagingEnable{
+            let contentOffset: CGPoint = {
+                let indexPath = self.centermostIndexPath
+                let section = self.numberOfSections > 1 ? (indexPath.section+(indexPath.item+1)/self.numberOfItems) : 0
+                let item = (indexPath.item+1) % self.numberOfItems
+                return self.collectionViewLayout.contentOffset(for: IndexPath(item: item, section: section))
+            }()
+            self.collectionView.setContentOffset(contentOffset, animated: true)
+        }else{
+            guard let _ = self.superview, let _ = self.window, self.numberOfItems > 0, !self.isTracking else {
+                return
+            }
+            autoScroll ()
         }
-        autoScroll ()
     }
     
     fileprivate func cancelTimer() {
@@ -636,3 +647,4 @@ extension FSPagerView {
     public static let automaticSize: CGSize = .zero
     
 }
+
