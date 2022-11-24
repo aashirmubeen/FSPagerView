@@ -121,6 +121,7 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
     }
     
     open var isPagingEnable: Bool = false
+    
     /// A Boolean value indicates that whether the pager view has infinite items. Default is false.
     @IBInspectable
     open var isInfinite: Bool = false {
