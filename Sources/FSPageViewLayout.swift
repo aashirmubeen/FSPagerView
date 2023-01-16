@@ -61,8 +61,10 @@ class FSPagerViewLayout: UICollectionViewLayout {
         self.numberOfSections = pagerView.numberOfSections(in: collectionView)
         self.numberOfItems = pagerView.collectionView(collectionView, numberOfItemsInSection: 0)
         self.actualItemSize = {
-            let hightOfCell = pagerView.bounds.height - 10
-            var size  = CGSize(width: hightOfCell * 0.8, height: hightOfCell)
+           
+            let hightOfCell =  pagerView.itemSize.height
+            let widthOfCell =  pagerView.itemSize.width-10
+            var size  = CGSize(width: widthOfCell, height: hightOfCell)
             if size == .zero {
                 size = collectionView.frame.size
             }
@@ -293,6 +295,7 @@ class FSPagerViewLayout: UICollectionViewLayout {
     }
 
 }
+
 
 
 
